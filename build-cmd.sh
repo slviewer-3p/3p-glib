@@ -12,7 +12,7 @@ set -u
 top="$(pwd)"
 stage="$top"/stage
 
-VERSION="2.48.0"
+VERSION="2.56.0"
 SOURCE_DIR="${top}/glib-${VERSION}"
 
 FFI_VERSION="3.3"
@@ -60,10 +60,9 @@ pushd "$SOURCE_DIR"
 			echo "Version: 8.35" >> ${stage}/lib/pkgconfig/libpcre.pc
 			echo "Libs: -L${stage}/packages/lib/release -lpcre" >> ${stage}/lib/pkgconfig/libpcre.pc
 			echo "Cflags: -I${stage}/packages/include/pcre" >> ${stage}/lib/pkgconfig/libpcre.pc
-			
-			
-			./configure --enable-static --disable-shared --disable-gtk-doc-html --prefix=${stage} --libdir="$stage/lib/release"
-			make -j 6 && make install && make distclean
+
+			./configure --enable-static --disable-shared --disable-gtk-doc-html --disable-libmount  --prefix=${stage} --libdir="$stage/lib/release"
+			make -j 6 && make install && make clean
 
 			cp -a ${stage}/lib/libffi.* "$stage/lib/release/"
         ;;

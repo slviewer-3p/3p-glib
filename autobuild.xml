@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <llsd>
 <map>
-  <key>installables</key>
-	<map>
-	  <key>pcre</key>
+    <key>installables</key>
+    <map>
+      <key>pcre</key>
       <map>
         <key>copyright</key>
         <string>Copyright (c) 1997-2014 University of Cambridge; Copyright(c) 2009-2014 Zoltan Herczeg; Copyright (c) 2007-2012, Google Inc.</string>
@@ -22,19 +22,19 @@
             <key>archive</key>
             <map>
               <key>hash</key>
-              <string>742a145c1518b9dc195ae0862828e6ae</string>
+              <string>b32744517ba1be19e46d68337ad692a5</string>
               <key>url</key>
-              <string>http://downloads.phoenixviewer.com/pcre-8.35.202021522-linux64-202021522.tar.bz2</string>
+              <string>jf://packages/linux64/pcre-8.35.221612152-linux64_bionic-221612152.tar.bz2</string>
             </map>
             <key>name</key>
             <string>linux64</string>
           </map>
         </map>
         <key>version</key>
-        <string>8.35.538986</string>
+        <string>8.35.221612152</string>
       </map>
-	</map>
-	<key>package_description</key>
+    </map>
+    <key>package_description</key>
     <map>
       <key>canonical_repo</key>
       <string>https://bitbucket.org/nickyd/3p-glib</string>
@@ -96,9 +96,6 @@
               <string>default</string>
             </map>
           </map>
-          <key>manifest</key>
-          <array>
-          </array>
           <key>name</key>
           <string>linux</string>
         </map>

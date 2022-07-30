@@ -50,6 +50,7 @@ pushd "$SOURCE_DIR"
 			export PKG_CONFIG_PATH=${stage}/lib/pkgconfig
 
 			pushd ${FFI_SOURCE_DIR}
+			autoreconf
 			# libffi does not seem to work well with --libdir, so those *.a need to be copied later
 			./configure --enable-static --disable-shared --disable-docs --prefix=${stage}
 			make -j 6 && make install && make distclean
@@ -61,6 +62,7 @@ pushd "$SOURCE_DIR"
 			echo "Libs: -L${stage}/packages/lib/release -lpcre" >> ${stage}/lib/pkgconfig/libpcre.pc
 			echo "Cflags: -I${stage}/packages/include/pcre" >> ${stage}/lib/pkgconfig/libpcre.pc
 
+			autoreconf
 			./configure --enable-static --disable-shared --disable-gtk-doc-html --disable-libmount  --prefix=${stage} --libdir="$stage/lib/release"
 			make -j 6 && make install && make clean
 

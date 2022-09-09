@@ -45,15 +45,15 @@ pushd "$SOURCE_DIR"
         darwin*)
 			;;
         linux64)
-			FLAGS="-m$AUTOBUILD_ADDRSIZE $LL_BUILD_RELEASE -I${stage}/include"
+			FLAGS="-m$AUTOBUILD_ADDRSIZE $LL_BUILD_RELEASE -I${stage}/include -Wno-format-overflow"
 			export CFLAGS="${FLAGS}" CXXFLAGS="${FLAGS}"
 			export PKG_CONFIG_PATH=${stage}/lib/pkgconfig
 
 			pushd ${FFI_SOURCE_DIR}
-			autoreconf
+			autoreconf -fi
 			# libffi does not seem to work well with --libdir, so those *.a need to be copied later
 			./configure --enable-static --disable-shared --disable-docs --prefix=${stage}
-			make -j 6 && make install && make distclean
+			make -j `nproc` && make install && make distclean
 			popd
 
 			echo "Name: libpcre" > ${stage}/lib/pkgconfig/libpcre.pc
@@ -62,11 +62,12 @@ pushd "$SOURCE_DIR"
 			echo "Libs: -L${stage}/packages/lib/release -lpcre" >> ${stage}/lib/pkgconfig/libpcre.pc
 			echo "Cflags: -I${stage}/packages/include/pcre" >> ${stage}/lib/pkgconfig/libpcre.pc
 
-			autoreconf
+			autoreconf -fi
 			./configure --enable-static --disable-shared --disable-gtk-doc-html --disable-libmount  --prefix=${stage} --libdir="$stage/lib/release"
-			make -j 6 && make install && make clean
+			make -j `nprox` && make install && make clean
 
-			cp -a ${stage}/lib/libffi.* "$stage/lib/release/"
+			test -f ${stage}/lib/libffi.a && cp -a ${stage}/lib/libffi.* "$stage/lib/release/"
+			test -f ${stage}/lib64/libffi.a && cp -a ${stage}/lib64/libffi.* "$stage/lib/release/"
         ;;
     esac
     mkdir -p "$stage/LICENSES"

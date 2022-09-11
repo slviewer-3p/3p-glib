@@ -63,8 +63,8 @@ pushd "$SOURCE_DIR"
 			echo "Cflags: -I${stage}/packages/include/pcre" >> ${stage}/lib/pkgconfig/libpcre.pc
 
 			autoreconf -fi
-			./configure --enable-static --disable-shared --disable-gtk-doc-html --disable-libmount  --prefix=${stage} --libdir="$stage/lib/release"
-			make -j `nprox` && make install && make clean
+			./configure --enable-static --disable-shared --disable-selinux --disable-gtk-doc-html --disable-libmount  --prefix=${stage} --libdir="$stage/lib/release"
+			make -j `nproc` && make install && make clean
 
 			test -f ${stage}/lib/libffi.a && cp -a ${stage}/lib/libffi.* "$stage/lib/release/"
 			test -f ${stage}/lib64/libffi.a && cp -a ${stage}/lib64/libffi.* "$stage/lib/release/"

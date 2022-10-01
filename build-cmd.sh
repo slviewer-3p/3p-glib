@@ -45,7 +45,7 @@ pushd "$SOURCE_DIR"
         darwin*)
 			;;
         linux64)
-			FLAGS="-m$AUTOBUILD_ADDRSIZE $LL_BUILD_RELEASE -I${stage}/include -Wno-format-overflow"
+			FLAGS="${AUTOBUILD_GCC_ARCH} $LL_BUILD_RELEASE -I${stage}/include -Wno-format-overflow"
 			export CFLAGS="${FLAGS}" CXXFLAGS="${FLAGS}"
 			export PKG_CONFIG_PATH=${stage}/lib/pkgconfig
 
